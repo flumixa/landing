@@ -3,6 +3,7 @@ import { cookies, headers } from "next/headers";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { LanguageProvider } from "@/lib/LanguageContext";
 import { JsonLd } from "@/components/JsonLd";
+import { YandexMetrika } from "@/components/YandexMetrika";
 import { KEYWORDS_ALL, SEO_EN, SEO_RU, SITE } from "@/lib/seo";
 import type { Lang } from "@/lib/i18n";
 import { LANG_COOKIE } from "@/middleware";
@@ -98,10 +99,6 @@ export async function generateMetadata(): Promise<Metadata> {
         "max-video-preview": -1,
       },
     },
-    icons: {
-      icon: [{ url: "/mark.svg", type: "image/svg+xml" }],
-      apple: [{ url: "/mark.svg" }],
-    },
     manifest: "/manifest.webmanifest",
     appleWebApp: {
       capable: true,
@@ -128,6 +125,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body>
         <LanguageProvider initialLang={lang}>{children}</LanguageProvider>
         <JsonLd />
+        <YandexMetrika />
       </body>
     </html>
   );

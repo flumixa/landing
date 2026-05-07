@@ -17,7 +17,7 @@ export function Footer() {
       <div className="container">
         <div className="foot-grid">
           <div className="foot-brand">
-            <Image src="/logo.svg" alt="Flumixa" width={120} height={26} />
+            <Image src="/logo.svg" alt="Flumixa" width={98} height={44} />
             <p>{t.footer.tagline}</p>
           </div>
           <div className="foot-col">

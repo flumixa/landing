@@ -10,7 +10,7 @@ export function Nav() {
     <nav className="nav">
       <div className="container nav-inner">
         <a className="nav-logo" href="#top" aria-label="Flumixa">
-          <Image src="/logo.svg" alt="Flumixa" width={120} height={26} priority />
+          <Image src="/logo.svg" alt="Flumixa" width={125} height={56} priority />
         </a>
         <div className="nav-links">
           <a href="#features">{t.nav.features}</a>
