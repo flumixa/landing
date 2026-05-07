@@ -48,7 +48,7 @@ jobs:
     environment: Prod
     env:
       CONTAINER: flumixa-landing
-      PORT: 3021
+      PORT: 3025
       ENV_DIR: /opt/flumixa-landing
     steps:
       - name: Validate deploy config
