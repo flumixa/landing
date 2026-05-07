@@ -1,8 +1,13 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
 export const alt = "Flumixa Media Server — Multi-stream broadcasting on your machine";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+
+const LOGO_SVG = readFileSync(join(process.cwd(), "public/logo.svg"), "utf8");
+const LOGO_DATA_URI = `data:image/svg+xml;base64,${Buffer.from(LOGO_SVG).toString("base64")}`;
 
 export default async function Image() {
   return new ImageResponse(
@@ -32,41 +37,9 @@ export default async function Image() {
           }}
         />
 
-        <div style={{ display: "flex", alignItems: "center", gap: 16, position: "relative" }}>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: 56,
-              height: 56,
-              borderRadius: 12,
-              background: "#0D55F6",
-              color: "#FFFFFF",
-              fontSize: 32,
-              fontWeight: 800,
-              letterSpacing: "-0.02em",
-            }}
-          >
-            F
-          </div>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <div style={{ fontSize: 28, fontWeight: 700, color: "#14161A", letterSpacing: "-0.02em" }}>
-              flumixa
-            </div>
-            <div
-              style={{
-                fontSize: 14,
-                fontWeight: 700,
-                color: "#7B8290",
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                fontFamily: "monospace",
-              }}
-            >
-              Media Server
-            </div>
-          </div>
+        <div style={{ display: "flex", alignItems: "center", position: "relative" }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={LOGO_DATA_URI} alt="Flumixa" width={250} height={112} />
           <div style={{ flex: 1 }} />
           <div
             style={{
