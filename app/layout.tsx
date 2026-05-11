@@ -6,7 +6,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { YandexMetrika } from "@/components/YandexMetrika";
 import { KEYWORDS_ALL, SEO_EN, SEO_RU, SITE } from "@/lib/seo";
 import type { Lang } from "@/lib/i18n";
-import { LANG_COOKIE } from "@/middleware";
+import { LANG_COOKIE } from "@/proxy";
 import "./globals.css";
 
 const inter = Inter({

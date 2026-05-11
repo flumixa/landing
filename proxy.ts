@@ -8,7 +8,7 @@ function detectFromAcceptLanguage(header: string | null): "en" | "ru" {
   return tags.some((t) => t.startsWith("ru")) ? "ru" : "en";
 }
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   const existing = req.cookies.get(LANG_COOKIE)?.value;
   if (existing === "en" || existing === "ru") {
     return NextResponse.next();
