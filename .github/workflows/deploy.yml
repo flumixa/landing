@@ -93,7 +93,6 @@ jobs:
               --name "$CONTAINER" \
               --restart unless-stopped \
               --network ft-private \
-              --add-host=host.docker.internal:host-gateway \
               -e HOSTNAME=0.0.0.0 \
               -e PORT=$PORT \
               $ENV_FILE_ARG \
