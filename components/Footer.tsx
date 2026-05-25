@@ -2,9 +2,13 @@
 
 import Image from "next/image";
 import { useLang } from "@/lib/LanguageContext";
+import { useConsent } from "@/lib/CookieConsentContext";
+import { CONSENT_DICT } from "@/lib/consent";
 
 export function Footer() {
-  const { t } = useLang();
+  const { lang, t } = useLang();
+  const { openModal } = useConsent();
+  const tc = CONSENT_DICT[lang];
   const link = ([label, href]: [string, string]) => (
     <li key={label}>
       <a href={href} {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
@@ -35,6 +39,9 @@ export function Footer() {
         </div>
         <div className="foot-bottom">
           <span>{t.footer.copy}</span>
+          <button type="button" className="foot-cookie-link" onClick={openModal}>
+            {tc.footerLink}
+          </button>
           <span>{t.footer.version}</span>
         </div>
       </div>

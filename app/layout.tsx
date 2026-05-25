@@ -2,11 +2,13 @@ import type { Metadata, Viewport } from "next";
 import { cookies, headers } from "next/headers";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { LanguageProvider } from "@/lib/LanguageContext";
+import { CookieConsentProvider } from "@/lib/CookieConsentContext";
 import { JsonLd } from "@/components/JsonLd";
-import { YandexMetrika } from "@/components/YandexMetrika";
+import { YandexMetrikaIfConsented } from "@/components/YandexMetrikaIfConsented";
+import { CookieConsentBanner } from "@/components/CookieConsentBanner";
 import { KEYWORDS_ALL, SEO_EN, SEO_RU, SITE } from "@/lib/seo";
 import type { Lang } from "@/lib/i18n";
-import { LANG_COOKIE } from "@/proxy";
+import { LANG_COOKIE, REGION_COOKIE } from "@/proxy";
 import "./globals.css";
 
 const inter = Inter({
@@ -120,12 +122,19 @@ export const viewport: Viewport = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const lang = await detectLang();
+  const c = await cookies();
+  const country = c.get(REGION_COOKIE)?.value ?? "";
   return (
     <html lang={lang} data-lang={lang} className={`${inter.variable} ${jetbrains.variable}`}>
       <body>
-        <LanguageProvider initialLang={lang}>{children}</LanguageProvider>
+        <LanguageProvider initialLang={lang}>
+          <CookieConsentProvider country={country}>
+            {children}
+            <YandexMetrikaIfConsented />
+            <CookieConsentBanner />
+          </CookieConsentProvider>
+        </LanguageProvider>
         <JsonLd />
-        <YandexMetrika />
       </body>
     </html>
   );
